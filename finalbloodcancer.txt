@@ -1,0 +1,332 @@
+go :-
+write('What is the patient''s name? '),
+read(Patient),get_single_char(Code),
+bloodcancer(Patient,Disease),
+write_list([Patient,', probably has ',Disease,'.']),nl.
+
+go :-
+write('Sorry, your disease doesnt look obvious'),nl,
+write('please carried out your complete blood tests first'),nl.
+
+symptom(Patient,itching) :-
+verify(Patient," have a itching (y/n) ?").
+symptom(Patient,weight_loss) :-
+verify(Patient," have a weight_loss (y/n) ?").
+symptom(Patient,fatigue) :-
+verify(Patient," have a fatigue (y/n) ?").
+symptom(Patient,swollen_glands) :-
+verify(Patient," have a swollen_glands (y/n) ?").
+symptom(Patient,shortness_of_breath) :-
+verify(Patient," have a shortness_of_breath (y/n) ?").
+symptom(Patient,night_sweats) :-
+verify(Patient," have a night_sweats (y/n) ?").
+symptom(Patient,fever) :-
+verify(Patient," have a fever (y/n) ?").
+symptom(Patient,cough) :-
+verify(Patient," have a cough (y/n) ?").
+symptom(Patient,petechiae) :-
+verify(Patient," have a petechiae/red spots under your skin (y/n) ?").
+symptom(Patient,night_sweats) :-
+verify(Patient,"have a night_sweats (y/n) ?").
+symptom(Patient,bleeding_gums) :-
+verify(Patient," have a bleeding_gums (y/n) ?").
+symptom(Patient,trouble_breathing) :-
+verify(Patient," have a trouble_breathing (y/n) ?").
+symptom(Patient,seizures) :-
+verify(Patient," have a seizures (y/n) ?").
+symptom(Patient,pale_skin) :-
+verify(Patient," have a pale_skin (y/n) ?").
+symptom(Patient,weight_loss) :-
+verify(Patient," have a weight_loss (y/n) ?").
+symptom(Patient,repeated_infection) :-
+verify(Patient," have a repeated_infection (y/n) ?").
+symptom(Patient,shortness_of_breathe) :-
+verify(Patient," have a shortness_of_breathe (y/n) ?").
+symptom(Patient,nose_bleeding) :-
+verify(Patient," have a nose_bleeding (y/n) ?").
+symptom(Patient,bruises) :-
+verify(Patient," have a bruises (y/n) ?").
+symptom(Patient,bone_pain) :-
+verify(Patient," have a bone_pain (y/n) ?").
+symptom(Patient,menstrual_irregularities) :-
+verify(Patient," have a menstrual_irregularities (y/n) ?").
+symptom(Patient,family_history_of_cancer) :-
+verify(Patient," have a  family history of cancer (y/n) ?").
+symptom(Patient,high_grade_fever) :-
+verify(Patient," have a  high_grade_fever (y/n) ?").
+symptom(Patient,body_rash) :-
+verify(Patient," have abody_rash (y/n) ?").
+symptom(Patient,headache) :-
+verify(Patient,"  headache (y/n) ?").
+symptom(Patient,persistent_fatigue) :-
+verify(Patient,"  persistent fatigue (y/n) ?").
+symptom(Patient,pre_existing_blood_disorder) :-
+verify(Patient,"  pre existing blood disorder (y/n) ?").
+symptom(Patient,cough) :-
+verify(Patient,"  cough (y/n) ?").
+symptom(Patient,body_ache) :-
+verify(Patient,"  body_ache (y/n) ?").
+symptom(Patient,fever_with_chills) :-
+verify(Patient,"  Fever with chills (y/n) ?").
+symptom(Patient,sore_throat) :-
+verify(Patient," sore_throat (y/n) ?").
+symptom(Patient,losing_weight) :-
+verify(Patient," constant losing weight without trying (y/n) ?").
+symptom(Patient,constipation) :-
+verify(Patient," constipation (y/n) ?").
+symptom(Patient,anal_fisher_with_blood) :-
+verify(Patient," Anal fisher with blood (y/n) ?").
+symptom(Patient,anal_fisher_without_blood) :-
+verify(Patient," Anal fisher without blood (y/n) ?").
+symptom(Patient,severe_itching) :-
+verify(Patient," Severe itching (y/n) ?").
+symptom(Patient,night_sweats) :-
+verify(Patient," Night sweats (y/n) ?").
+symptom(Patient,painless_swelling_of_lymphnodes_in_your_neck_or_armpits) :-
+verify(Patient," Painless swelling of lymph nodes in your neck or armpits (y/n) ?").
+symptom(Patient,pain_in_your_lymphnodes_after_drinking_alcohol) :-
+verify(Patient," Pain in your lymph nodes after drinking alcohol (y/n) ?").
+symptom(Patient,fatigue) :-
+verify(Patient," have a fatigue (y/n) ?").
+symptom(Patient,frequent_infections) :-
+verify(Patient," have a frequent_infections (y/n) ?").
+symptom(Patient,unusual_paleness) :-
+verify(Patient," have a Unusual_paleness (y/n) ?").
+symptom(Patient,buries) :-
+verify(Patient," have a buries (y/n) ?").
+symptom(Patient,shortness_of_breathing) :-
+verify(Patient," have a shortness_of_breathing(y/n) ?").
+symptom(Patient,chills) :-
+verify(Patient," have a chills (y/n) ?").
+symptom(Patient,weight_loss) :-
+verify(Patient," have a weight_loss (y/n) ?").
+symptom(Patient,swollen_abdomen) :-
+verify(Patient," have a swollen_abdomen (y/n) ?").
+symptom(Patient,chest_pain) :-
+verify(Patient," have a chest_pain (y/n) ?").
+symptom(Patient,frequent_infections) :-
+verify(Patient," have a frequent_infections (y/n) ?").
+
+
+ask(Patient,Question) :-
+	write(Patient),write(', do you'),write(Question),
+	read(N),
+	( (N == yes ; N == y)
+      ->
+       assert(yes(Question)) ;
+       assert(no(Question)), fail).
+
+:- dynamic yes/1,no/1.
+
+verify(P,S) :-
+   (yes(S) -> true ;
+    (no(S) -> fail ;
+     ask(P,S))).
+
+undo :- retract(yes(_)),fail.
+undo :- retract(no(_)),fail.
+undo.
+
+
+
+bloodcancer(Patient,lymphoma) :-
+symptom(Patient,itching),
+symptom(Patient,weight_loss),
+symptom(Patient,fatigue),
+symptom(Patient,swollen_glands),
+symptom(Patient, shortness_of_breath) ,
+symptom(Patient,night_sweats),
+symptom(Patient,fever),
+symptom(Patient,cough),
+nl,
+write('Medicine Sugestions:'),
+nl,
+write('1: doxorubicin (Adriamycin)'),
+nl,
+write('2: cyclophosphamide (Cytoxan)'),
+nl,
+write('3: vincristine (Oncovin)'),
+ nl,
+ write('3: procarbazine (Matulane)'),
+nl,
+write(' Advices:'),
+write('Please do Exercises like walking and swimming for relieve. You might also try alternative therapies. In case of any extreme symptom immidiately consult your doctor. '),
+nl,!.
+
+bloodcancer(Patient,myeloma) :-
+symptom(Patient,bone_pain),
+symptom(Patient,weight_loss),
+symptom(Patient,fatigue),
+symptom(Patient,nausea),
+symptom(Patient, mental_confusion) ,
+symptom(Patient,weakness),
+symptom(Patient,thirst),
+nl,
+write('Medicine Sugestions:'),
+nl,
+write('1: Abecma (Idecabtagene Vicleucel)'),
+nl,
+write('2: Alkeran for Injection (Melphalan Hydrochloride)'),
+nl,
+write('3: Alkeran Tablets (Melphalan)'),
+nl,
+write('4: Bortezomib'),
+nl,
+nl,
+write('Advices:'),
+nl,
+write('Stay away from spicy or fried items. Add a variety of fruits and vegetables every day for antioxidants.
+Eat healthy fats, like avocado, nuts, seeds, or olive oil. Stay away from greasy options.
+Limit added sugars.
+Drink plenty of water
+'),
+nl,!.
+
+bloodcancer(Patient,acute_lymphoblastic_eukemia) :-
+symptom(Patient,petechiae),
+symptom(Patient,night_sweats),
+symptom(Patient,bleeding_gums),
+symptom(Patient,trouble_breathing),
+symptom(Patient,seizures),
+symptom(Patient,pale_skin),
+symptom(Patient,weight_loss),
+
+nl,
+write('Test and Sugestions:'),
+nl,
+write('2: Bone_Marrow_Test'),
+nl,
+write('3: Imaging_Test'),
+nl,
+write('4: Spinal_tap'),
+nl,
+write('Please encourage physical activity'),
+nl,!.
+
+bloodcancer(Patient,b-cell_Lymphoblastic_Leukemia) :-
+symptom(Patient,repeated_infections),
+symptom(Patient,shortness_of_breathe),
+symptom(Patient,nose_bleeding),
+symptom(Patient,bruises),
+symptom(Patient,bone_pain),
+symptom(Patient,menstrual_irregularities),
+
+nl,
+write('Advices and Sugestions:'),
+nl,
+write('1: Complete_Blood_count(CBC)'),
+nl,
+write('2: Peripheral_blood_smear'),
+nl,
+write('Do not drink Alchohol and eat healthy food'),
+nl,!.
+
+bloodcancer(Patient,leukaemia) :-
+symptom(Patient,cough),
+symptom(Patient,body_ache),
+symptom(Patient,sore_throat),
+symptom(Patient,losing_weight),
+symptom(Patient,constipation),
+symptom(Patient,anal_fisher_with_blood),
+symptom(Patient,anal_fisher_without_blood),
+symptom(Patient,high_grade_fever),
+symptom(Patient,body_rash),
+symptom(Patient,headache),
+symptom(Patient,persistent_fatigue),
+symptom(Patient, pre_existing_blood_disorder),
+symptom(Patient,fever_with_chills),
+symptom(Patient,family_history_of_leukaemia_cancer),
+nl,
+write('Test and Sugestions:'),
+nl,
+write('1: Blood Test'),
+nl,
+write('2: Bone_Marrow_Test'),
+nl,
+write('3: Imaging_Test'),
+nl,
+write('4: Spinal_tap'),
+nl,
+write('Please encourage physical activity'),
+nl,!.
+
+
+
+bloodcancer(Patient,hodgkins_lymphoma) :-
+symptom(Patient,painless_swelling_of_lymphnodes_in_your_neck_or_armpits),
+symptom(Patient,night_sweats),
+symptom(Patient,losing_weight),
+symptom(Patient,high_grade_fever),
+symptom(Patient,severe_itching),
+symptom(Patient,persistent_fatigue),
+symptom(Patient,pain_in_your_lymphnodes_after_drinking_alcohol),
+symptom(Patient,family_history_of_hodgkins_lymphoma_blood_cancer),
+
+
+nl,
+write(' Medicines:'),
+nl,
+write('1: doxorubicin (Adriamycin)'),
+nl,
+write('2: cyclophosphamide (Cytoxan)'),
+nl,
+write('3: vincristine (Oncovin)'),
+ nl,
+ write('3: procarbazine (Matulane)'),
+nl,
+write(' Advices:'),
+write('Please do Exercises like walking and swimming for relieve. You might also try alternative therapies '),
+nl,!.
+
+
+bloodcancer(Patient,myelodysplastic_syndromes) :-
+symptom(Patient,fatigue),
+symptom(Patient,frequent_infections),
+symptom(Patient,unusual_paleness),
+symptom(Patient,buries),
+symptom(Patient,shortness_of_breathing),
+nl,
+write('Medicines and Sugestions:'),
+nl,
+write('1: Cytarabine (Cytosar-U)'),
+nl,
+write('2: Daunorubicin (Cerubidine)'),
+nl,
+write('3: Lenalidomide (Revlimid)'),
+nl,
+write('Please do chemotherapy and consult the doctor immediatly'),
+nl,!.
+
+
+bloodcancer(Patient,non-hodgkin_lymphoma) :-
+symptom(Patient,chills),
+symptom(Patient,weight_loss),
+symptom(Patient,swollen_abdomen),
+symptom(Patient,chest_pain),
+symptom(Patient,frequent_infections),
+nl,
+write('Medicines and Sugesstions:'),
+nl,
+write('1: Cyclophosphamide'),
+nl,
+write('2: Doxorubicin'),
+nl,
+write('3: Prednisone'),
+nl,
+write('Please keep your immune system strong and exercise'),
+nl,!.
+
+
+
+
+
+write_list([]).
+write_list([Term| Terms]) :-
+write(Term),
+write_list(Terms).
+
+response(Reply) :-
+get_single_char(Code),
+put_code(Code), nl,
+char_code(Reply, Code).
+
